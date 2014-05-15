@@ -1,0 +1,15 @@
+{
+    "title": "Sitemap XML",
+    "version": "1.00",
+    "name": "SitemapXml",
+    "description": "Generates XML sitemap.",
+    "author": "ImpressPages",
+    "options": [
+        {
+            "label": "Sitemap URL (e.g. sitemap)",
+            "name": "sitemapUrl",
+            "type": "text",
+            "default": "sitemap"
+        }
+    ]
+}
