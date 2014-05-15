@@ -15,5 +15,4 @@ Generates XML sitemap.
 
 ## Usage
 
-1. Point your web browser to http://www.example.com/sitemap to check your sitemap.
-2. A plugin generates XML sitemap.
+Point your web browser to http://www.example.com/sitemap to check your sitemap.
