@@ -9,22 +9,23 @@ class Model{
 
         foreach ($pages as $pageId){
 
-            $pageUrl = self::getPageUrl($pageId);
-
-            if ($pageUrl){
-                $xml .= '<url>';
-
-                $xml .=     '<loc>';
-                $xml .=    ipHomeUrl().$pageUrl;
-                $xml .=     '</loc>';
-
-                $xml .=     '<lastmod>';
-                $xml .=     self::getPageLastMod($pageId);
-                $xml .=     '</lastmod>';
-
-                $xml .= '</url>';
-
+            $page = ipPage($pageId);
+            if (!$page) {
+                continue;
             }
+
+            $xml .= '<url>';
+
+            $xml .=     '<loc>';
+            $xml .=    $page->getLink();
+            $xml .=     '</loc>';
+
+            $xml .=     '<lastmod>';
+            $xml .=     date('Y-m-d', strtotime($page->getUpdatedAt()));
+            $xml .=     '</lastmod>';
+
+            $xml .= '</url>';
+
         }
 
         $xml .= '</urlset>';
@@ -39,16 +40,8 @@ class Model{
         return $pages;
     }
 
-    public static function getPageUrl($pageId){
-        return ipPage($pageId)->getUrlPath();
-    }
 
 
-    public static function getPageLastMod($pageId){
 
-        $modTime = ipPage($pageId)->getUpdatedAt();
-        $timestamp = strtotime($modTime);
-        return date('Y-m-d', $timestamp);
-    }
 
 }
