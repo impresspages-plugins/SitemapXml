@@ -6,18 +6,20 @@ class Model{
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         $pages = self::getAllPageIds();
+        $urls = array();
 
         foreach ($pages as $pageId){
 
             $page = ipPage($pageId);
-            if (!$page) {
+            if (!$page || in_array($page->getLink(),$urls)) {
                 continue;
             }
+            $urls[] = $page->getLink();
 
             $xml .= '<url>';
 
             $xml .=     '<loc>';
-            $xml .=    $page->getLink();
+            $xml .=     $page->getLink();
             $xml .=     '</loc>';
 
             $xml .=     '<lastmod>';
